@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<h2 class="text-lg font-bold" style="text-align: center;">Transactions History</h2>
+<div class="flex justify-between items-center" style="margin-bottom: 20px;">
+  <input type="text" pInputText placeholder="Search by customer ID, account number, or description"
+    [(ngModel)]="searchKeyword" (ngModelChange)="onSearch()" class="w-full mr-2" style="width: 35%;" />
+  <button pButton type="button" label="Logout" icon="pi pi-sign-out" class="p-button-danger" (click)="onLogout()"
+    style="float: right;"></button>
+</div>
+
+<p-table styleClass="p-datatable-gridlines p-datatable-striped" [value]="transactions" [paginator]="true" [rows]="10"
+  [showCurrentPageReport]="true" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [lazy]="true"
+  (onLazyLoad)="loadTransactions($event)">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Account Number</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Customer ID</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-transaction>
+    <tr>
+      <td>{{ transaction.accountNumber }}</td>
+      <td>{{ transaction.trxAmount }}</td>
+      <td>
+        <input type="text" pInputText [(ngModel)]="transaction.description" />
+      </td>
+      <td>{{ transaction.trxDate }}</td>
+      <td>{{ transaction.trxTime }}</td>
+      <td>{{ transaction.customerId }}</td>
+      <td>
+        <button pButton icon="pi pi-check" class="p-button-success" icon="pi pi-pencil"
+          (click)="updateDescription(transaction)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,21 @@
+<p-toast></p-toast>
+<div class="card flex justify-content-center">
+  <p-panel header="Sign Up - Transaction History">
+    <div class="p-fluid" style="width: 30%; margin: 0 auto;">
+      <div class="p-field" style="margin-bottom: 20px;">
+        <label for="username">Username</label>
+        <input id="username" type="text" pInputText [(ngModel)]="username" />
+      </div>
+
+      <div class="p-field" style="margin-bottom: 20px;">
+        <label for="password">Password</label>
+        <input id="password" type="password" pInputText [(ngModel)]="password"/>
+      </div>
+
+      <p-button label="Sign Up" icon="pi pi-user-plus" (click)="onSignUp()" [disabled]="!username || !password"></p-button>
+      <p class="p-mt-3 p-text-center">
+        <a routerLink="/signin">Sign in</a>
+      </p>
+    </div>
+  </p-panel>
+</div>
